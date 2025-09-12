@@ -1,0 +1,1 @@
+export const AddPost = () => <div>Страница добавления постов</div>

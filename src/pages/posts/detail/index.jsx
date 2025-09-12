@@ -1,0 +1,1 @@
+export const DetailPost = () => <div>Детальная страница постов</div>

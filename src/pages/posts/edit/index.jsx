@@ -1,0 +1,1 @@
+export const EditPost = () => <div>Страница редактирования поста</div>
