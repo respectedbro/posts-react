@@ -1,1 +1,1 @@
-export const EditPost = () => <div>Страница редактирования поста</div>
+export const EditPostPage = () => <div>Страница редактирования поста</div>;

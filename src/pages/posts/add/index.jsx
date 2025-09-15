@@ -1,1 +1,1 @@
-export const AddPost = () => <div>Страница добавления постов</div>
+export const AddPostPage = () => <div>Страница добавления постов</div>;
