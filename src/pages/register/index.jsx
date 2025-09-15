@@ -1,1 +1,1 @@
-export const Registration = () => <div>Страница РЕГИСТРАЦИИ</div>
+export const RegistrationPage = () => <div>Страница РЕГИСТРАЦИИ</div>;
