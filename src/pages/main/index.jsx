@@ -1,34 +1,35 @@
-import { Posts } from "../../components/Posts/index.jsx";
-import { Container } from "../../components/Container/index.jsx";
-import React from "react";
-import { Typo } from "../../components/Typo/index.jsx";
+import {Posts} from '../../components/Posts/index.jsx';
+import {Container} from '../../components/Container/index.jsx';
+import React, {useEffect} from 'react';
+import {Typo} from '../../components/Typo/index.jsx';
+import {useDispatch, useSelector} from 'react-redux';
+import {getFreshPosts} from '../../redux/slices/postSlice.js';
 
-const INITIAL_POSTS = [
-  {
-    id: 1,
-    title: "Post 1",
-    image:
-      "https://habrastorage.org/r/w1560/files/59e/ec1/0dd/59eec10ddaae4ee6ac2d9a95057dc950.png",
-  },
-  {
-    id: 2,
-    title: "Post 2",
-    image:
-      "https://habrastorage.org/r/w1560/files/59e/ec1/0dd/59eec10ddaae4ee6ac2d9a95057dc950.png",
-  },
-  {
-    id: 3,
-    title: "Post 3",
-    image:
-      "https://habrastorage.org/r/w1560/files/59e/ec1/0dd/59eec10ddaae4ee6ac2d9a95057dc950.png",
-  },
-];
 
-export const MainPage = () => (
-  <>
-    <Container>
-      <Typo>Свежая публикация</Typo>
-      <Posts posts={INITIAL_POSTS} />
-    </Container>
-  </>
-);
+export const MainPage = () => {
+    const dispatch = useDispatch()
+
+    const postForView = useSelector((state) => state.posts.postForView);
+    const freshPosts = useSelector((state) => state.posts.freshPosts);
+
+    useEffect(() => {
+        dispatch(getFreshPosts())
+    }, []);
+
+    return <>
+        <Container>
+            {freshPosts &&  <>
+                <Typo>Свежая публикация</Typo>
+                <Posts posts={freshPosts}/>
+            </>
+            }
+            {postForView && <>
+                <Typo>Последний просмотренный пост</Typo>
+                <Posts posts={[postForView]}/>
+            </>
+            }
+        </Container>
+    </>;
+};
+
+
