@@ -4,10 +4,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Typo} from '../../../components/Typo/index.jsx';
 import {Container} from '../../../components/Container/index.jsx';
 
-import * as SC from './styles.js';
 import {Link} from '../../../components/Link/index.jsx';
-import {getPost} from '../../../redux/slices/postSlice.js';
+import {getPostById} from '../../../redux/slices/postSlice.js';
 import {useParams} from 'react-router';
+
+import * as SC from './styles.js';
 
 export const DetailPostPage = () => {
     const {id} = useParams()
@@ -16,7 +17,7 @@ export const DetailPostPage = () => {
 
 
     useEffect(() => {
-        dispatch(getPost(Number(id)));
+        dispatch(getPostById(Number(id)));
     }, [id]);
 
     if (!postForView) {
