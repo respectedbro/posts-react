@@ -24,16 +24,17 @@ export const DetailPostPage = () => {
         return <Container>Loading...</Container>
     }
 
-    if (!postForView.post) {
+    if (!postForView.post || !Object.prototype.hasOwnProperty.call(postForView.post, 'id')) {
         return <>Пост не найден...</>;
     }
 
     const {post} = postForView
+    const image = post.image || 'https://habrastorage.org/r/w1560/files/59e/ec1/0dd/59eec10ddaae4ee6ac2d9a95057dc950.png'
 
     return (
         <Container>
             <Typo>{post.title}</Typo>
-            {post.image && <SC.Image src={post.image} alt={post.title}/>}
+            <SC.Image src={image} alt={post.title}/>
             <SC.Text>{post.body}</SC.Text>
             <SC.LinkWrapper style={{clear: 'both'}}>
                 <Link to={'/posts'}>Вернуться к публикациям</Link>
