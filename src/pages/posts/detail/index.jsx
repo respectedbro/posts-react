@@ -20,15 +20,21 @@ export const DetailPostPage = () => {
         dispatch(getPostById(Number(id)));
     }, [id]);
 
-    if (!postForView) {
+    if (postForView.loading) {
+        return <Container>Loading...</Container>
+    }
+
+    if (!postForView.post) {
         return <>Пост не найден...</>;
     }
 
+    const {post} = postForView
+
     return (
         <Container>
-            <Typo>{postForView.title}</Typo>
-            <SC.Image src={postForView.image} alt={postForView.title}/>
-            <SC.Text>{postForView.text}</SC.Text>
+            <Typo>{post.title}</Typo>
+            {post.image && <SC.Image src={post.image} alt={post.title}/>}
+            <SC.Text>{post.body}</SC.Text>
             <SC.LinkWrapper style={{clear: 'both'}}>
                 <Link to={'/posts'}>Вернуться к публикациям</Link>
             </SC.LinkWrapper>
