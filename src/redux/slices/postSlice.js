@@ -1,79 +1,99 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {postsAPI} from '../../api/postsAPI.js';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { postsAPI } from "../../api/postsAPI.js";
 
 const initialState = {
-    posts: {
-        list: null,
-        loading: false,
-    },
-    postForView: {
-        post: null,
-        loading: false
-    },
-    freshPosts: null
+  posts: {
+    list: null,
+    loading: false,
+  },
+  postForView: {
+    post: null,
+    loading: false,
+  },
+  freshPosts: {
+    posts: null,
+    loading: false,
+  },
 };
 
 export const getPostById = createAsyncThunk(
-    'posts/fetchById',
-    async (postId) => {
-        return await postsAPI.fetchById(postId);
-    }
-);
-export const getPosts = createAsyncThunk(
-    'posts/fetchPosts',
-    async () => {
-        return await postsAPI.fetchPosts();
-    }
+  "posts/fetchById",
+  async (postId) => {
+    return await postsAPI.fetchById(postId);
+  }
 );
 
-
-
-export const postsSlice = createSlice({
-    name: 'posts',
-    initialState,
-    reducers: {
-        editPost: (state, action) => {
-            //edit post
-        },
-
-        getFreshPosts: (state) => {
-            state.freshPosts = state.posts.list.slice(0, 3);
-        },
-
-        addPost: (state, action) => {
-            // add new post by data
-        }
-
-    },
-
-    extraReducers: (builder) => {
-        builder.addCase(getPostById.pending, (state) => {
-            state.postForView = {
-                post: null,
-                loading: true
-            }
-        });
-        builder.addCase(getPostById.fulfilled, (state, action) => {
-            state.postForView = {
-                post: action.payload,
-                loading: false
-            }
-        });
-        builder.addCase(getPosts.pending, (state) => {
-            state.posts = {
-                list: null,
-                loading: true
-            }
-        });
-        builder.addCase(getPosts.fulfilled, (state, action) => {
-            state.posts = {
-                list: action.payload,
-                loading: false
-            }
-        });
-    }
+export const getPosts = createAsyncThunk("posts/fetchPosts", async () => {
+  return await postsAPI.fetchPosts();
 });
 
-export const {addPost, editPost, setPosts, getFreshPosts} = postsSlice.actions;
+export const getFreshPosts = createAsyncThunk(
+  "posts/fetchFreshPosts",
+  async (limit) => {
+    return await postsAPI.fetchFreshPosts(limit);
+  }
+);
+
+export const postsSlice = createSlice({
+  name: "posts",
+  initialState,
+  reducers: {
+    editPost: (state, action) => {
+      //edit post
+    },
+
+    addPost: (state, action) => {
+      const newPost = { ...action.payload };
+
+      newPost.id = new Date().getTime();
+      state.posts.list = state.posts.list
+        ? [action.payload && [...state.posts.list]]
+        : [action.payload];
+    },
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase(getPostById.pending, (state) => {
+      state.postForView = {
+        post: null,
+        loading: true,
+      };
+    });
+    builder.addCase(getPostById.fulfilled, (state, action) => {
+      state.postForView = {
+        post: action.payload,
+        loading: false,
+      };
+    });
+
+    builder.addCase(getPosts.pending, (state) => {
+      state.posts = {
+        list: null,
+        loading: true,
+      };
+    });
+    builder.addCase(getPosts.fulfilled, (state, action) => {
+      state.posts = {
+        list: action.payload,
+        loading: false,
+      };
+    });
+
+    builder.addCase(getFreshPosts.pending, (state) => {
+      state.freshPosts = {
+        posts: null,
+        loading: true,
+      };
+    });
+    builder.addCase(getFreshPosts.fulfilled, (state, action) => {
+      state.freshPosts = {
+        posts: action.payload,
+        loading: false,
+      };
+    });
+  },
+});
+
+export const { addPost, editPost } = postsSlice.actions;
 
 export default postsSlice.reducer;
