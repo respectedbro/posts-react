@@ -1,1 +1,3 @@
-export const AddPostPage = () => <div>Страница добавления постов</div>;
+import { PostForm } from "../component/PostForm/index.jsx";
+
+export const AddPostPage = () => <PostForm />;
