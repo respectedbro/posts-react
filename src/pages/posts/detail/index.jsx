@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {Typo} from '../../../components/Typo/index.jsx';
-import {Container} from '../../../components/Container/index.jsx';
+import {Typo} from '../../../components/ui/Typo/index.jsx';
+import {Container} from '../../../components/ui/Container/index.jsx';
 
-import {Link} from '../../../components/Link/index.jsx';
+import {Link} from '../../../components/ui/Link/index.jsx';
 import {getPostById, showPost, deletePost} from '../../../redux/slices/postSlice.js';
 import {useParams, useNavigate} from 'react-router-dom';
 
