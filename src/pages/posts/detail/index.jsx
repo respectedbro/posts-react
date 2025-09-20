@@ -51,7 +51,8 @@ export const DetailPostPage = () => {
       <SC.Image src={image} alt={post.title} />
       <SC.Text>{post.body}</SC.Text>
       <SC.LinkWrapper style={{ clear: "both" }}>
-        <Link to={"/posts"}>Вернуться к публикациям</Link>
+        <Link to="/posts">Вернуться к публикациям</Link>
+        <Link to={`/posts/${post.id}/edit`}>Редактировать</Link>
       </SC.LinkWrapper>
     </Container>
   );
