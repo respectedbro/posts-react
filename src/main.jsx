@@ -11,7 +11,7 @@ import { DetailPostPage } from "./pages/posts/detail/index.jsx";
 import { EditPostPage } from "./pages/posts/edit/index.jsx";
 import { AddPostPage } from "./pages/posts/add/index.jsx";
 import { AuthPage } from "./pages/auth/index.jsx";
-import { RegistrationPage } from "./pages/register/index.jsx";
+import { RegistrationPage } from "./pages/registration/index.jsx";
 
 const router = createBrowserRouter([
   {

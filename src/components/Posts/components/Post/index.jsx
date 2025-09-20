@@ -1,5 +1,5 @@
 import * as SC from "./styles.js";
-import { Link } from "../../../Link/index.jsx";
+import { Link } from "../../../ui/Link/index.jsx";
 
 export const Post = ({ post }) => {
     const image = post.image || 'https://habrastorage.org/r/w1560/files/59e/ec1/0dd/59eec10ddaae4ee6ac2d9a95057dc950.png'
