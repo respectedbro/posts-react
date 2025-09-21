@@ -8,7 +8,7 @@ import {useNavigate} from 'react-router-dom';
 
 export const RegistrationPage = () => {
     const [formValues, setFormValues] = useState({name: '', surname: '', email: '', password: ''});
-const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const onSubmit = (e) => {
         e.preventDefault();
